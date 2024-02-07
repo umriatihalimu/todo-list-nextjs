@@ -41,15 +41,15 @@ const Todo = () => {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="xl:w-[400px] xl:h-[500px] md:w-[300px] md:h-[400px] w-[200px] h-[300px] p-3 border flex flex-col items-center gap-y-2 ">
-        <h1 className="font-bold mb-2 text-[16px] capitalize">
+      <div className="bg-blue-400 text-white xl:w-[400px] xl:h-[500px] md:w-[300px] md:h-[400px] w-[200px] h-[300px] p-3 border flex flex-col  gap-y-2 ">
+        <h1 className="font-bold mb-2 text-[20px] capitalize">
           List Tugas yang Ingin dilakukan
         </h1>
-        <div className="p-2 border  w-full flex justify-between rounded-md">
+        <div className=" bg-white text-black p-2 border  w-full flex justify-between rounded-md">
           <input
             type="text"
             value={inputTask}
-            placeholder="Tugas hari in..."
+            placeholder="Tugas hari ini..."
             className="outline-none"
             onChange={(e) => {
               setInputTask(e.target.value);
@@ -63,34 +63,42 @@ const Todo = () => {
         {/* logic jika ada task atau tidak */}
         <p>
           {!tasks
-            ? "belum ada tugas"
+            ? "Belum ada tugas"
             : tasks.length == 1
-            ? "anda punya 1 tugas"
+            ? "Anda punya 1 tugas"
             : tasks.length > 1
-            ? `anda punya ${tasks.length} tugas`
-            : "belum ada tugas"}
+            ? `Anda punya ${tasks.length} tugas`
+            : "Belum ada tugas"}
         </p>
 
         {/* tampilkan tugas di window */}
-        <div>
+        <div className="bg-white text-black mt-5 rounded-[5px] w-full  ">
           {tasks.map((task) => {
             return (
-              <div
-                key={task.id}
-                className="p-2 border flex w-[280px] justify-between rounded-md"
-              >
-                <div>
-                  <p>{task.title}</p>
+              <>
+                <div
+                  key={task.id}
+                  className="p-2 flex items-center  w-full justify-between"
+                >
+                  <div>
+                    <p>{task.title}</p>
+                  </div>
+                  <button onClick={() => handleDeleteTask(task)}>
+                    <FaTrashCan />
+                  </button>
                 </div>
-                <button onClick={() => handleDeleteTask(task)}>
-                  <FaTrashCan />
-                </button>
-              </div>
+                <hr />
+              </>
             );
           })}
         </div>
         {tasks.length ? (
-          <button onClick={hapusSemua}>Hapus semua</button>
+          <button
+            onClick={hapusSemua}
+            className=" bg-red-700 p-1 rounded-md w-[120px] shadow-sm"
+          >
+            Hapus semua
+          </button>
         ) : null}
       </div>
     </div>
